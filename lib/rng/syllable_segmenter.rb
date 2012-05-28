@@ -1,4 +1,4 @@
-require 'syllable'
+require 'rng/syllable'
 
 module Rng
   module SyllableSegmenter
@@ -58,7 +58,7 @@ module Rng
                ['z', 'zzt'] +
                ['']
 
-    def RngSyllableSegmenter.init_syllable_matching
+    def self.init_syllable_matching
       # Initialize the list of valid initial sounds
       init_longest_matching($initials)
 
@@ -69,7 +69,7 @@ module Rng
       init_longest_matching($finals)
     end
 
-    def RngSyllableSegmenter.segment(name)
+    def self.segment(name)
       beginning = []
       ending = []
 
@@ -104,7 +104,7 @@ module Rng
       return (beginning + ending)
     end
 
-    def RngSyllableSegmenter.extract_first_syllable(name)
+    def self.extract_first_syllable(name)
       initial = ''
       inner = ''
       final = ''
@@ -139,10 +139,10 @@ module Rng
         end
       end
 
-      return RngSyllable.new(initial, inner, final)
+      return Syllable.new(initial, inner, final)
     end
 
-    def RngSyllableSegmenter.extract_last_syllable(name)
+    def self.extract_last_syllable(name)
       initial = ''
       inner = ''
       final = ''
@@ -177,10 +177,10 @@ module Rng
         end
       end
 
-      return RngSyllable.new(initial, inner, final)
+      return Syllable.new(initial, inner, final)
     end
 
-    def RngSyllableSegmenter.init_longest_matching(sounds)
+    def self.init_longest_matching(sounds)
       sounds.sort! do |a,b|
         if a == ''
           1
@@ -192,7 +192,7 @@ module Rng
       end
     end
 
-    def RngSyllableSegmenter.init_shortest_matching(sounds)
+    def self.init_shortest_matching(sounds)
       sounds.sort! do |a,b|
         if a == ''
           1
@@ -207,5 +207,5 @@ module Rng
 
 
   # Initialize the module
-  RngSyllableSegmenter.init_syllable_matching
+  SyllableSegmenter.init_syllable_matching
 end
