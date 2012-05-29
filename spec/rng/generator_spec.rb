@@ -13,7 +13,7 @@ describe Rng::Generator do
     @names.size.should == 10
   end
   
-  it 'generates names less or equal to a specified length' do
+  it 'generates names less than or equal to a specified length' do
     @names = @generator.generate(10, 6)
     @names.should_not be_nil
     @names.each do |name|
