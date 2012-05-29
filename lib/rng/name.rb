@@ -26,5 +26,13 @@ module Rng
       # Set the name
       @name = name
     end
+    
+    def to_s
+      self.name
+    end
+    
+    def length
+      self.name.length
+    end
   end
 end

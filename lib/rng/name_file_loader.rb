@@ -1,4 +1,4 @@
-require 'name'
+require 'rng/name'
 
 module Rng
   class NameFileLoader
@@ -21,7 +21,7 @@ module Rng
       @file.each_line do |line|
         tokens = line.chomp.strip.split ','
         if tokens[0] != '' and tokens[0] != 'Name'
-          name = RngName.new(tokens[0].downcase.capitalize)
+          name = Name.new(tokens[0].downcase.capitalize)
           @names << name
         end
       end
@@ -29,7 +29,7 @@ module Rng
       # Close the file
       @file.close
 
-      return @names.sort {|a,b| a.Name <=> b.Name}
+      return @names.sort {|a,b| a.name <=> b.name}
     end
   end
 end

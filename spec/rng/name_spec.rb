@@ -14,6 +14,14 @@ describe Rng::Name do
     @thorin.raw_name.should == 'Tho/rin'
   end
   
+  it 'provides a to_s implementation which returns the name as a string' do
+    @thorin.to_s.should == @thorin.name
+  end
+  
+  it 'provides a length attribute' do
+    @thorin.length.should == 6
+  end
+  
   it 'provides access to the syllables of the name' do
     @thorin.syllables.should_not be_nil
     @thorin.syllables.should be_an(Array)

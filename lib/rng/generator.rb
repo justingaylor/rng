@@ -1,15 +1,13 @@
-require 'syllable_segmenter'
-require 'name_file_loader'
-require 'syllable_stats'
-require 'generated_name'
+require 'rng/syllable_segmenter'
+require 'rng/name_file_loader'
+#require 'rng/syllable_stats'
+require 'rng/generated_name'
 
 module Rng
-  class NameGenerator
-
-
+  class Generator
     def initialize(filename)
       # Load the file containing the list of names
-      loader = RngNameFileLoader.new
+      loader = NameFileLoader.new
       @names = loader.load(filename)
 
       # Dump the names loaded
@@ -19,7 +17,7 @@ module Rng
       #statistics = RngSyllableStats.new(@names)
     end
 
-    def generate(n, max_chars, algorithm = :VERY_SIMPLE)
+    def generate(n, max_chars=15, algorithm=:very_simple)
       names = []
       for i in 1..n
         name = "-" * (max_chars+1)
@@ -31,17 +29,19 @@ module Rng
       return names
     end
 
-    def generate_name(max_len, algorithm = :VERY_SIMPLE)
+    def generate_name(max_len, algorithm = :very_simple)
       # Determine which algorithm to use to generate the name
-      if algorithm == :VERY_SIMPLE
+      if algorithm == :very_simple
         return generate_name_very_simple(max_len)
-      elsif algorithm == :SIMPLE
+      elsif algorithm == :simple
         return generate_name_simple(max_len)
       else
         return generate_name_bayesian(max_len)
       end
     end
 
+    # Generates names exactly two syllables long
+    #
     def generate_name_very_simple(max_len)
       source_names = []
       beginning = ''
@@ -55,9 +55,9 @@ module Rng
       # Select a beginning syllable
       loop do
         name = @names[rand(@names.length)]
-        beginning = name.Syllables[0].to_s.capitalize
+        beginning = name.syllables[0].to_s.capitalize
         if beginning.length < max_len
-          source_names << name.Name
+          source_names << name.name
           break
         end
       end
@@ -67,18 +67,18 @@ module Rng
       loop do
         ending = ''
         name   = @names[rand(@names.length)]
-        ending = name.Syllables[name.Syllables.length-1].to_s
+        ending = name.syllables[name.syllables.length-1].to_s
         if (beginning + ending).length < max_len
-          source_names << name.Name
+          source_names << name.name
           break
         end
         count += 1
         break unless count <= 100
       end
 
-      name = RngGeneratedName.new(remove_reps(beginning + ending).capitalize, source_names)
+      name = GeneratedName.new(remove_reps(beginning + ending).capitalize, source_names)
 
-      return name.Name
+      return name
     end
 
     def generate_name_simple(max_len)
@@ -95,9 +95,9 @@ module Rng
       # Select a beginning syllable
       loop do
         name = @names[rand(@names.length)]
-        beginning = name.Syllables[0].to_s.capitalize
+        beginning = name.syllables[0].to_s.capitalize
         if beginning.length < max_len
-          source_names << name.Name
+          source_names << name.name
           break
         end
       end
@@ -107,9 +107,9 @@ module Rng
       loop do
         ending = ''
         name   = @names[rand(@names.length)]
-        ending = name.Syllables[name.Syllables.length-1].to_s
+        ending = name.syllables[name.syllables.length-1].to_s
         if (beginning + ending).length < max_len
-          source_names << name.Name
+          source_names << name.name
           break
         end
         count += 1
@@ -121,11 +121,11 @@ module Rng
         middle = ''
         temp_source_names = []
         # Determine the number of syllables intermediate syllables
-        num_interm = rand(1)
+        num_interm = rand(4)
         num_interm.times do
           name = @names[rand(@names.length)]
-          temp_source_names << name.Name
-          middle += name.Syllables[rand(name.Syllables.length)].to_s
+          temp_source_names << name.name
+          middle += name.syllables[rand(name.syllables.length)].to_s
         end
         if remove_reps((beginning + middle + ending)).length <= max_len
           source_names += temp_source_names
@@ -133,9 +133,9 @@ module Rng
         end
       end
 
-      name = RngGeneratedName.new(remove_reps(beginning + middle + ending).capitalize, source_names)
+      name = GeneratedName.new(remove_reps(beginning + middle + ending).capitalize, source_names)
 
-      return name.Name
+      return name
     end
 
     def generate_name_bayesian(max_chars)

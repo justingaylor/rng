@@ -1,0 +1,1 @@
+require 'rng/generator'

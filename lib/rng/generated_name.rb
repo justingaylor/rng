@@ -1,13 +1,12 @@
+require 'rng/name'
+
 module Rng
   class GeneratedName < Name
+    attr_accessor :source_names
+    
     def initialize(name, sources)
       super(name)
-      @sources = sources
+      @source_names = sources
     end
-
-    def SourceNames
-      @sources
-    end
-
   end
 end
