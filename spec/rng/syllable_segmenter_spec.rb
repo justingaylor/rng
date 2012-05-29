@@ -1,6 +1,5 @@
 require 'rng/syllable_segmenter'
 
-
 describe Rng::SyllableSegmenter do
   it 'can segment single syllable names' do
     syllables = Rng::SyllableSegmenter.segment('Thor')
