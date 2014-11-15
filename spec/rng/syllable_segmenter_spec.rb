@@ -1,39 +1,39 @@
-require 'rng/syllable_segmenter'
+require_relative File.join('..', 'spec_helper')
 
 describe Rng::SyllableSegmenter do
   it 'can segment single syllable names' do
     syllables = Rng::SyllableSegmenter.segment('Thor')
-    syllables.should_not be_nil
-    syllables.should be_an(Array)
-    syllables.size.should == 1
+    expect(syllables).to_not be_nil
+    expect(syllables).to be_an(Array)
+    expect(syllables.size).to be(1)
   end
-  
+
   it 'segments double syllable names' do
     syllables = Rng::SyllableSegmenter.segment('Thorin')
-    syllables.should_not be_nil
-    syllables.should be_an(Array)
-    syllables.size.should == 2
+    expect(syllables).to_not be_nil
+    expect(syllables).to be_an(Array)
+    expect(syllables.size).to be(2)
   end
-  
+
   it 'segments triple syllable names' do
     syllables = Rng::SyllableSegmenter.segment('Mephisto')
-    syllables.should_not be_nil
-    syllables.should be_an(Array)
-    syllables.size.should == 3
+    expect(syllables).to_not be_nil
+    expect(syllables).to be_an(Array)
+    expect(syllables.size).to be(3)
   end
-  
+
   it 'segments loooooooooooong names' do
     syllables = Rng::SyllableSegmenter.segment('Mephistopheles')
-    syllables.should_not be_nil
-    syllables.should be_an(Array)
-    syllables.size.should == 5
+    expect(syllables).to_not be_nil
+    expect(syllables).to be_an(Array)
+    expect(syllables.size).to be(5)
   end
-  
+
   it 'segments names into non-overlapping, non-empty syllables' do
     name = 'Andromeda'
     syllables = Rng::SyllableSegmenter.segment(name)
-    syllables.should_not be_nil
-    syllables.should be_an(Array)
-    syllables.join('').should == name.downcase
+    expect(syllables).to_not be_nil
+    expect(syllables).to be_an(Array)
+    expect(syllables.join('')).to eq(name.downcase)
   end
 end

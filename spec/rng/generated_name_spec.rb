@@ -1,14 +1,12 @@
-require 'rng/generated_name'
-
+require_relative File.join('..', 'spec_helper')
 
 describe Rng::GeneratedName do
-  before(:each) do
-    @sources = ['Thorin', 'Limdor']
-    @name = Rng::GeneratedName.new('Thodor', @sources)
-  end
-  
+  let(:sources) { ['Thorin', 'Limdor'] }
+  let(:name) { Rng::GeneratedName.new('Thodor', sources) }
+  let(:source_names) { name.source_names }
+
   it 'provides an array of source names used to derive this name' do
-    @name.source_names.should_not be_nil
-    @name.source_names.size.should == 2
+    expect(source_names).to_not be_nil
+    expect(source_names.size).to eq(2)
   end
 end

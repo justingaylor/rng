@@ -1,5 +1,3 @@
-require 'rng/syllable'
-
 module Rng
   module SyllableSegmenter
     # Array for initial sounds in syllables

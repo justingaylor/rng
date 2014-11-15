@@ -1,8 +1,3 @@
-require 'rng/syllable_segmenter'
-require 'rng/name_file_loader'
-#require 'rng/syllable_stats'
-require 'rng/generated_name'
-
 module Rng
   class Generator
     def initialize(filename)

@@ -1,16 +1,14 @@
-require 'rng/name_file_loader'
+require_relative File.join('..', 'spec_helper')
 
 describe Rng::NameFileLoader do
-  before(:each) do
-    @path = File.join('spec', 'data', 'names.csv')
-  end
-  
+  let(:path) { File.join('spec', 'data', 'names.csv') }
+  let(:loader) { loader = Rng::NameFileLoader.new }
+
   it 'loads a csv file with names' do
     # Load the file
-    @loader = Rng::NameFileLoader.new
-    @names = @loader.load(@path)
-    
-    @names.should_not be_nil
-    @names.size.should be > 0
+    names = loader.load(path)
+
+    expect(names).to_not be_nil
+    expect(names.size).to be > 0
   end
 end

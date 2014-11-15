@@ -1,4 +1,3 @@
-require 'rng/name'
 
 module Rng
   class NameFileLoader

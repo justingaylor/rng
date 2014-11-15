@@ -1,46 +1,42 @@
-require 'rng/generator'
-
+require_relative File.join('..', 'spec_helper')
 
 describe Rng::Generator do
-  before(:each) do
-    @path = File.join('spec', 'data', 'names.csv')
-    @generator = Rng::Generator.new(@path)
-  end
-  
+  let(:path) { File.expand_path(File.join('spec', 'data', 'names.csv')) }
+  let(:generator) { Rng::Generator.new(path) }
+
   it 'generates a specified number of names' do
-    @names = @generator.generate(10)
-    @names.should_not be_nil
-    @names.size.should == 10
+    names = generator.generate(10)
+    expect(names).to_not be_nil
+    expect(names.size).to eq(10)
   end
-  
+
   it 'generates names less than or equal to a specified length' do
-    @names = @generator.generate(10, 6)
-    @names.should_not be_nil
-    @names.each do |name|
-      name.length.should be <= 6
+    names = generator.generate(10, 6)
+    expect(names).to_not be_nil
+    names.each do |name|
+      expect(name.length).to be < 10
     end
   end
-  
-  it 'generates names using a very simple algorithm' do
-    # Very simple => exactly two syllable names (an initial and final only)
-    @names = @generator.generate(10, 8, :very_simple)
-    @names.should_not be_nil
-    @names.each do |name|
-      name.should be_an(Rng::GeneratedName)
-      name.length.should be <= 10
+
+  # Very simple => exactly two syllable names (an initial and final only)
+  it 'generates names using the "very_simple" algorithm' do
+    names = generator.generate(10, 8, :very_simple)
+    expect(names).to_not be_nil
+    names.each do |name|
+      expect(name).to be_an(Rng::GeneratedName)
+      expect(name.length).to be < 10
     end
   end
-  
-  it 'generates names using a simple algorithm' do
-    # Simple => Initial and final syllables + 0 or more intermediates
-    @names = @generator.generate(10, 20, :simple)
-    @names.should_not be_nil
-    @names.size.should == 10
-    @names.each do |name|
-      name.should be_an(Rng::GeneratedName)
-      name.length.should be <= 20
+
+  # Simple => Initial and final syllables + 0 or more intermediates
+  it 'generates names using the "simple" algorithm' do
+    names = generator.generate(10, 20, :simple)
+    expect(names).to_not be_nil
+    expect(names.size).to eq(10)
+    names.each do |name|
+      expect(name).to be_an(Rng::GeneratedName)
+      expect(name.length).to be < 20
     end
   end
-  
-  it 'generates names using a bayesian algorithm'
+
 end

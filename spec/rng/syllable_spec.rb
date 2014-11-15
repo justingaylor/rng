@@ -1,30 +1,28 @@
-require 'rng/syllable'
+require_relative File.join('..', 'spec_helper')
 
 describe Rng::Syllable do
-  before(:each) do
-    @syllable = Rng::Syllable.new("TH", "O", "R")
-  end
-  
+  let(:syllable) { Rng::Syllable.new("TH", "O", "R") }
+
   it 'can be converted to a down-cased string' do
-    @syllable.should respond_to(:to_s)
-    @syllable.to_s.should == 'thor'
+    expect(syllable).to respond_to(:to_s)
+    expect(syllable.to_s).to eq('thor')
   end
-  
-  it 'supports an empty final sound' do
-    @syl = Rng::Syllable.new('FL', 'O')
-    @syl.to_s.should == 'flo'
-  end
-  
+
   it 'provides an initial field' do
-    @syllable.initial.should == 'th'
+    expect(syllable.initial).to eq('th')
   end
-  
+
   it 'provides an inner field' do
-    @syllable.inner.should == 'o'
+    expect(syllable.inner).to eq('o')
   end
-  
+
   it 'provides a final field' do
-    @syllable.final.should == 'r'
+    expect(syllable.final).to eq('r')
   end
-  
+
+  it 'supports an empty final sound' do
+    syl = Rng::Syllable.new('FL', 'O')
+    expect(syl.to_s).to eq('flo')
+  end
+
 end

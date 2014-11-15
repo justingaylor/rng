@@ -1,39 +1,38 @@
-require 'rng/name'
+require_relative File.join('..', 'spec_helper')
 
 describe Rng::Name do
-  before(:each) do
-    @thorin = Rng::Name.new('Thorin')
-    @mephistopheles = Rng::Name.new('Mephistopheles')
-  end
-  
+  let(:thorin) { Rng::Name.new('Thorin') }
+  let(:mephisto) { Rng::Name.new('Mephistopheles') }
+
   it 'provides a field for the name passed to it' do
-    @thorin.name.should == 'Thorin'
+    expect(thorin.name).to eq('Thorin')
   end
-  
+
   it 'provides the raw version of name (with slashes separating syllables)' do
-    @thorin.raw_name.should == 'Tho/rin'
+    expect(thorin.raw_name).to eq('Tho/rin')
   end
-  
+
   it 'provides a to_s implementation which returns the name as a string' do
-    @thorin.to_s.should == @thorin.name
+    expect(thorin.to_s).to eq(thorin.name)
   end
-  
+
   it 'provides a length attribute' do
-    @thorin.length.should == 6
+    expect(thorin.length).to eq(6)
   end
-  
+
   it 'provides access to the syllables of the name' do
-    @thorin.syllables.should_not be_nil
-    @thorin.syllables.should be_an(Array)
-    @thorin.syllables.size.should == 2
-    @thorin.syllables.each do |syllable|
-      syllable.should be_an(Rng::Syllable)
+    expect(thorin.syllables).to_not be_nil
+    expect(thorin.syllables).to be_an(Array)
+    expect(thorin.syllables.size).to eq(2)
+    thorin.syllables.each do |syllable|
+      expect(syllable).to be_an(Rng::Syllable)
     end
-    @mephistopheles.syllables.should_not be_nil
-    @mephistopheles.syllables.should be_an(Array)
-    @mephistopheles.syllables.size.should == 5
-    @mephistopheles.syllables.each do |syllable|
-      syllable.should be_an(Rng::Syllable)
+
+    expect(mephisto.syllables).to_not be_nil
+    expect(mephisto.syllables).to be_an(Array)
+    expect(mephisto.syllables.size).to eq(5)
+    mephisto.syllables.each do |syllable|
+      expect(syllable).to be_an(Rng::Syllable)
     end
   end
 end

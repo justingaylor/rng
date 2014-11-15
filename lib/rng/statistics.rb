@@ -1,5 +1,3 @@
-require 'name.rb'
-require 'syllable_stats.rb'
 
 module Rng
   class Statistics
