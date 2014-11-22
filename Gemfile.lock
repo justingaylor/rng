@@ -45,7 +45,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  fuubar (= 2.0.0.rc1)
+  fuubar
   pry
   pry-byebug
   pry-stack_explorer

@@ -5,5 +5,5 @@ group :test do
   gem 'pry'
   gem 'pry-stack_explorer', require: false
   gem 'pry-byebug'
-  gem 'fuubar', '2.0.0.rc1', require: false
+  gem 'fuubar'
 end
