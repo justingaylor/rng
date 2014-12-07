@@ -35,7 +35,7 @@ describe Rng::Generator do
     expect(names.size).to eq(10)
     names.each do |name|
       expect(name).to be_an(Rng::GeneratedName)
-      expect(name.length).to be < 20
+      expect(name.length).to be <= 20
     end
   end
 

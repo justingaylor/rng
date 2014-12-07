@@ -2,25 +2,22 @@
 module Rng
   class NameFileLoader
     def initialize
-      @names = []
+      reinitialize
     end
 
     def load(path)
-      if not File.exists?(path)
-        puts 'File ' + path + ' does not exist.'
-        @file = nil
-        return nil
-      end
+      reinitialize
+
+      raise Rng::FileLoadError.new("File '#{path}' does not exist.") unless File.exists?(path)
 
       # Open the file
+      count = 0
       @file = File.new(path, File::RDONLY)
-
-      # Construct an array of name objects
-      @names = []
-      @file.each_line do |line|
-        tokens = line.chomp.strip.split ','
-        if tokens[0] != '' and tokens[0] != 'Name'
-          name = Name.new(tokens[0].downcase.capitalize)
+      @file.readlines.each do |line|
+        tokens = line.chomp.strip.split(',')
+        name = tokens[0]
+        if name != '' && name != 'Name'
+          name = Name.new(name.downcase.capitalize)
           @names << name
         end
       end
@@ -29,6 +26,13 @@ module Rng
       @file.close
 
       return @names.sort {|a,b| a.name <=> b.name}
+    end
+
+    private
+
+    def reinitialize
+      @names = []
+      @file = nil
     end
   end
 end

@@ -18,7 +18,7 @@ module Rng
 
     def name=(name)
       # Segment the name into its component syllables
-      @syllables = SyllableSegmenter.segment(name)
+      @syllables = Segmenters::FantasySyllableSegmenter.segment(name)
       @syllables.map! { |s| Syllable.new(s.initial, s.inner, s.final) }
 
       # Set the name

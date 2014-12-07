@@ -1,5 +1,7 @@
+require_relative File.join('rng', 'exceptions')
 require_relative File.join('rng', 'syllable')
-require_relative File.join('rng', 'syllable_segmenter')
+require_relative File.join('rng', 'segmenters', 'fantasy_syllable_segmenter')
+require_relative File.join('rng', 'segmenters', 'fantasy_syllable_segmenter')
 require_relative File.join('rng', 'name')
 require_relative File.join('rng', 'name_file_loader')
 require_relative File.join('rng', 'generated_name')
