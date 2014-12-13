@@ -17,6 +17,61 @@ module Rng
         init_longest_matching(finals)
       end
 
+      # Array for initial sounds in syllables
+      def initials
+        @initials
+      end
+
+      # Array for inner sounds in syllables
+      def inners
+        @inners
+      end
+
+      # Array for final sounds in syllables
+      def finals
+        @finals
+      end
+
+      def segment(name)
+        beginning = ending = []
+
+        orig_name = name = name.downcase
+
+        passes = 0
+        while name != ''
+          # TODO: If more than one pass and no change (not 50 pass limit)
+          raise Rng::SegmentError.new(orig_name, name) unless passes < 50
+
+          # Extract the last syllable
+          last = [extract_last_syllable(name)]
+
+          # Add the new syllable to the front of ending (we are working backward from the ending)
+          ending = last + ending
+
+          # Remove the last syllable from the name string
+          name = name[0..-last[0].to_s.length-1]
+
+          # If there was only one syllable, we are done
+          if name == ''
+            break
+          end
+
+          # Extract the first syllable
+          first = [extract_first_syllable(name)]
+
+          # Add the new syllable to the end of beginning (we are working forward from the beginning)
+          beginning = beginning + first
+
+          # Remove the first syllable from the name string
+          #name = (name.length == first[0].to_s.length ? '' : name[first[0].to_s.length..-1])
+          name = name[first[0].to_s.length..-1]
+
+          passes +=1
+        end
+
+        return (beginning + ending)
+      end
+
       def extract_first_syllable(name)
         initial = inner = final = ''
         name = name.downcase
