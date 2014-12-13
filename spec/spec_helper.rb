@@ -1,7 +1,8 @@
-require_relative File.join('..', 'lib', 'rng.rb')
-
 require 'rspec'
 require 'pry'
+
+require_relative File.join('..', 'lib', 'rng.rb')
+
 
 RSpec.configure do |config|
   config.mock_framework = :rspec

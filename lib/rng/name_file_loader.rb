@@ -1,12 +1,14 @@
 
 module Rng
   class NameFileLoader
-    def initialize
-      reinitialize
+    attr_reader :segmenter
+
+    def initialize(segmenter=Rng::Segmenters::FantasySyllableSegmenter)
+      reinitialize(segmenter)
     end
 
     def load(path)
-      reinitialize
+      reinitialize(segmenter)
 
       raise Rng::FileLoadError.new("File '#{path}' does not exist.") unless File.exists?(path)
 
@@ -17,7 +19,8 @@ module Rng
         tokens = line.chomp.strip.split(',')
         name = tokens[0]
         if name != '' && name != 'Name'
-          name = Name.new(name.downcase.capitalize)
+          name = Name.new(name.downcase.capitalize, segmenter)
+          puts name.syllables.collect(&:to_s).join(", ")
           @names << name
         end
       end
@@ -30,9 +33,10 @@ module Rng
 
     private
 
-    def reinitialize
+    def reinitialize(segmenter)
       @names = []
       @file = nil
+      @segmenter = segmenter
     end
   end
 end
