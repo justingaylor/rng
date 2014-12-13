@@ -1,6 +1,6 @@
 require_relative File.join('..', '..', 'spec_helper')
 
-describe Rng::Segmenters::JapaneseSyllableSegmenter do
+describe Rng::Segmenters::JapaneseNameSegmenter do
 
   context '.segment' do
 

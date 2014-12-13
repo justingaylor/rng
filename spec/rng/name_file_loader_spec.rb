@@ -4,8 +4,8 @@ describe Rng::NameFileLoader do
   context '.load' do
 
     {
-      Rng::Segmenters::FantasySyllableSegmenter => File.join('spec', 'data', 'names.csv'),
-      Rng::Segmenters::JapaneseSyllableSegmenter => File.join('data', 'sengoku-names.csv')
+      Rng::Segmenters::FantasyNameSegmenter => File.join('spec', 'data', 'names.csv'),
+      Rng::Segmenters::JapaneseNameSegmenter => File.join('data', 'sengoku-names.csv')
     }.each do |segmenter, path|
       it "loads '#{path}' successfully" do
         # Load the file

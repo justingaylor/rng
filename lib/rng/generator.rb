@@ -1,9 +1,11 @@
 module Rng
   class Generator
-    def initialize(filename)
+    def initialize(filename, segmenter=Rng::Segmenters::FantasyNameSegmenter)
       # Load the file containing the list of names
-      loader = NameFileLoader.new
+      loader = NameFileLoader.new(segmenter)
       @names = loader.load(filename)
+
+      @segmenter = segmenter
 
       # Dump the names loaded
       #self.dump_names
@@ -71,7 +73,7 @@ module Rng
         break unless count <= 100
       end
 
-      name = GeneratedName.new(remove_reps(beginning + ending).capitalize, source_names)
+      name = GeneratedName.new(remove_reps(beginning + ending).capitalize, source_names, @segmenter)
 
       return name
     end

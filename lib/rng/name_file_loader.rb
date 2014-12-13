@@ -3,7 +3,7 @@ module Rng
   class NameFileLoader
     attr_reader :segmenter
 
-    def initialize(segmenter=Rng::Segmenters::FantasySyllableSegmenter)
+    def initialize(segmenter=Rng::Segmenters::FantasyNameSegmenter)
       reinitialize(segmenter)
     end
 
@@ -20,7 +20,7 @@ module Rng
         name = tokens[0]
         if name != '' && name != 'Name'
           name = Name.new(name.downcase.capitalize, segmenter)
-          puts name.syllables.collect(&:to_s).join(", ")
+          #puts name.syllables.collect(&:to_s).join(", ")
           @names << name
         end
       end

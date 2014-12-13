@@ -2,7 +2,7 @@ require_relative 'syllable_segmenter_base'
 
 module Rng
   module Segmenters
-    module JapaneseSyllableSegmenter
+    module JapaneseNameSegmenter
       include Rng::SyllableSegmenterBase
 
       # Array for initial sounds in syllables

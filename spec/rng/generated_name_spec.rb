@@ -2,7 +2,8 @@ require_relative File.join('..', 'spec_helper')
 
 describe Rng::GeneratedName do
   let(:sources) { ['Thorin', 'Limdor'] }
-  let(:name) { Rng::GeneratedName.new('Thodor', sources) }
+  let(:segmenter) { Rng::Segmenters::FantasySyllableSegmenter }
+  let(:name) { Rng::GeneratedName.new('Thodor', sources, segmenter) }
   let(:source_names) { name.source_names }
 
   it 'provides an array of source names used to derive this name' do

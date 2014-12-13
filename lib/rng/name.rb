@@ -3,7 +3,7 @@ module Rng
   class Name
     attr_accessor :syllables, :segmenter
 
-    def initialize(name, segmenter)
+    def initialize(name, segmenter=Rng::Segmenters::FantasyNameSegmenter)
       # Using the setter method because it segments syllables
       self.segmenter = segmenter
       self.name = name
