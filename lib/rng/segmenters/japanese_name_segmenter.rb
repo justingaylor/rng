@@ -7,7 +7,7 @@ module Rng
 
       # Array for initial sounds in syllables
       @initials = ['b', 'ch', 'd', 'f', 'g', 'h', 'j', 'k'] +
-                 ['m', 'n', "n'", 'r', 's', 'sh', 't', 'ts', 'w', 'y', 'z']
+                  ['m', 'n', "n'", 'r', 's', 'sh', 't', 'ts', 'w', 'y', 'z']
 
       # Array for inner sounds in syllables
       @inners  = ['']

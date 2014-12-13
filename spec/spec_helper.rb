@@ -1,4 +1,5 @@
 require 'rspec'
+require 'rspec/its'
 require 'pry'
 
 require_relative File.join('..', 'lib', 'rng.rb')

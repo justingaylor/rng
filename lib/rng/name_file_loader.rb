@@ -20,7 +20,7 @@ module Rng
         name = tokens[0]
         if name != '' && name != 'Name'
           name = Name.new(name.downcase.capitalize, segmenter)
-          #puts name.syllables.collect(&:to_s).join(", ")
+          #puts name.syllables.join(" / ")
           @names << name
         end
       end
