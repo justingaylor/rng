@@ -130,7 +130,7 @@ module Rng
         end
       end
 
-      name = GeneratedName.new(remove_reps(beginning + middle + ending).capitalize, source_names)
+      name = GeneratedName.new(remove_reps(beginning + middle + ending).capitalize, source_names, @segmenter)
 
       return name
     end
