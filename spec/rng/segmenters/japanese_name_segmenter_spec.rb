@@ -68,6 +68,14 @@ describe Rng::Segmenters::JapaneseNameSegmenter do
       end
     end
 
-
+    it "segments doubled n's as in \"Gen'i\"" do
+      syllables = subject.segment("Gen'i")
+      expect(syllables).to_not be_nil
+      expect(syllables).to be_an(Array)
+      expect(syllables.size).to eq(3)
+      expect(syllables[0].to_s).to eq("ge")
+      expect(syllables[1].to_s).to eq("n'")
+      expect(syllables[2].to_s).to eq("i")
+    end
   end
 end
