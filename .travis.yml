@@ -1,5 +1,5 @@
 language: ruby
 cache: bundler
 rvm:
-  - 2.1.2
+  - 3.1.1
 script: bundle exec rspec --color --backtrace --format=documentation
