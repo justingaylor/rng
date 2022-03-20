@@ -3,9 +3,9 @@ require_relative File.join('..', '..', 'spec_helper')
 class DummySegmenter
   include Rng::SyllableSegmenterBase
 
-  $initials = ['th', 'r', 'n', 'm', 'g']
+  $initials = ['r', 'n', 'm', 'g', 'th']
   $inners   = ['a', 'e', 'i', 'o', 'ie']
-  $finals   = ['n', 'th', 'l', 'g', 'r', 'b', '']
+  $finals   = ['n', 'l', 'g', 'r', 'b', 'th', '']
 
   def self.initials; $initials; end
   def self.inners; $inners; end
